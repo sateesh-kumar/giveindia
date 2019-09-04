@@ -1,0 +1,59 @@
+Problem statement:
+
+Automating some of the manual testing done on a desktop website.
+Time Limit : 2 hours
+Write selenium tests for the following:
+1. Open the page l 
+*2. Verify that the external links in “External links“ section work
+*3. Click on the “Oxygen” link on the Periodic table at the bottom of the page
+*4. Verify that it is a “featured article”
+5. Take a screenshot of the right hand box that contains element properties
+*6. Count the number of pdf links in “References“
+7. In the search bar on top right enter “pluto” and verify that the 2 nd suggestion
+is “Plutonium”
+
+Feel free to decide on:
+1. browser to automate (desktop)
+2. programming language used for selenium
+Please send us the code as a git repository preferably.
+
+<span style="display:block">O</span>
+<a href="/wiki/Oxygen" title="Oxygen"><span style="display:block">O</span></a>
+
+url_oxygen = driver.find_element(:title, "Oxygen").attribute("href")
+
+<a href="/wiki/Wikipedia:Featured_articles" title="This is a featured article. Click here for more information."><img alt="This is a featured article. Click here for more information." src="//upload.wikimedia.org/wikipedia/en/thumb/e/e7/Cscr-featured.svg/20px-Cscr-featured.svg.png" decoding="async" srcset="//upload.wikimedia.org/wikipedia/en/thumb/e/e7/Cscr-featured.svg/30px-Cscr-featured.svg.png 1.5x, //upload.wikimedia.org/wikipedia/en/thumb/e/e7/Cscr-featured.svg/40px-Cscr-featured.svg.png 2x" data-file-width="462" data-file-height="438" height="19" width="20"></a>
+
+
+link is not broken
+
+require 'open-uri'
+require 'selenium-webdriver'
+
+expected_status = ["200", "OK"]
+
+link = driver.find_element(:tag_name, "a").attribute("href")
+io = open(link)
+link_status = io.status
+
+unless expected_status == link_status
+  puts "Link is broken"
+end
+
+
+elements = @driver.find_elements(css: ".account-item>a")    
+elements.size.times do |i|
+  @driver.find_element(css: ".account-list > li:nth-child(#{i})>a").click
+  # Do something
+  @driver.navigate.back
+end
+
+driver.find_elements(:class, "qa-share-message")
+      .first
+      .send_keys("This is a test message")
+
+By byXpath = By.xpath("//input[(@id='id_Start') and (@class = 'blabla')]")
+List<WebElement> elements = driver.findElements(byXpath);
+
+
+//span[@class="reference_text"] and //span.text()==(PDF)
